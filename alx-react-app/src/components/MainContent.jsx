@@ -6,4 +6,4 @@ function MainContent() {
   );
 }
 
-export default FavoriteDestinations;
+export default MainContent;
