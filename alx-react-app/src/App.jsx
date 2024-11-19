@@ -10,6 +10,12 @@ import "./App.css";import React from 'react';
 function App() {
   return (
     <div>
+       <Header />  {/* My Favourite Cities */}
+      <MainContent />  {/* I love to visit New York, Paris, and Tokyo */}
+      <Footer />  {/* @2023 City Lovers */}
+    </div>
+  );
+}
      <header>
   <h1>My Favorite Cities</h1>
 </header>
