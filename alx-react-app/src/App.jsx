@@ -1,11 +1,11 @@
+import Header from './Header';  // Import the Header component
+import MainContent from './MainContent';  // Import the MainContent component
+import Footer from './Footer';  // Import the Footer component
+
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";import React from 'react';
-
-import Header from './Header';  // Import the Header component
-import MainContent from './MainContent';  // Import the MainContent component
-import Footer from './Footer';  // Import the Footer component
 
 function App() {
   return (
