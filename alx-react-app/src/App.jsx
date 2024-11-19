@@ -1,8 +1,3 @@
-/src
-  /components
-    Header.jsx
-    MainContent.jsx
-    Footer.jsx
 import Header from './Header';  // Import the Header component
 import MainContent from './MainContent';  // Import the MainContent component
 import Footer from './Footer';  // Import the Footer component
