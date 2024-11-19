@@ -53,6 +53,30 @@ function App() {
     </>
   );
 }
+import React from 'react';
+import UserProfile from './components/UserProfile';  // Import UserProfile component
+
+function App() {
+  return (
+    <div>
+      <h1>User Profile</h1>
+      {/* Use the UserProfile component and pass props */}
+      <UserProfile 
+        name="Alice" 
+        age="25" 
+        bio="Loves hiking and photography" 
+      />
+      <UserProfile 
+        name="Bob" 
+        age="30" 
+        bio="Enjoys coding and traveling" 
+      />
+    </div>
+  );
+}
+
+export default App;
+
 import React from "react";
 import WelcomeMessage from "./WelcomeMessage"; // import the new component
 
