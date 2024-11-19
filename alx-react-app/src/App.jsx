@@ -1,3 +1,8 @@
+/src
+  /components
+    Header.jsx
+    MainContent.jsx
+    Footer.jsx
 import Header from './Header';  // Import the Header component
 import MainContent from './MainContent';  // Import the MainContent component
 import Footer from './Footer';  // Import the Footer component
@@ -17,10 +22,6 @@ function App() {
     <main>
       <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
-  );
-      <Footer />  {/* Include the Footer component */}
-    </div>
-  );
 }
 
 function App() {
@@ -60,13 +61,16 @@ function App() {
       <WelcomeMessage /> {/* Add the WelcomeMessage component here */}
     </div>
     import React from 'react';
-import Footer from './Footer';  // Import the Footer component
-
-function App() {
+function Footer() {
   return (
-    <div>
-      <Footer />  {/* Include the Footer component */}
-    </div>
+    <footer>
+      <p>© 2023 City Lovers</p>
+    </footer>
+  );
+}
+
+export default Footer;
+
   );
   );
 }
