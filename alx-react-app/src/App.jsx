@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -29,7 +29,17 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
+}
+import React from "react";
+import WelcomeMessage from "./WelcomeMessage"; // import the new component
+
+function App() {
+  return (
+    <div>
+      <WelcomeMessage /> {/* Add the WelcomeMessage component here */}
+    </div>
+  );
 }
 
-export default App
+export default App;
