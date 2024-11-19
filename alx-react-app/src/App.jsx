@@ -1,6 +1,6 @@
-import Header from './Header';  // Import the Header component
-import MainContent from './MainContent';  // Import the MainContent component
-import Footer from './Footer';  // Import the Footer component
+import Header from './components/Header';  
+import MainContent from './components/MainContent';
+import Footer from './components/Footer'; 
 
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
