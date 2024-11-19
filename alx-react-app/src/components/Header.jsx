@@ -1,6 +1,4 @@
-import React from 'react';
-
-function FavoriteCities() {
+function header() {
   return (
     <header>
       <h1>My Favorite Cities</h1>
