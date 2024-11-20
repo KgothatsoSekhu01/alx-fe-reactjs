@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AddRecipeForm } from './components/AddRecipeForm';  // Importing AddRecipeForm
-import { RecipeList } from './components/RecipeList';        // Importing RecipeList
-import { RecipeDetails } from './components/RecipeDetails';  // Importing RecipeDetails
+import { AddRecipeForm } from './components/AddRecipeForm';  // Import AddRecipeForm
+import { RecipeList } from './components/RecipeList';        // Import RecipeList
+import { RecipeDetails } from './components/RecipeDetails';  // Import RecipeDetails
 
 function App() {
   return (
@@ -9,11 +9,11 @@ function App() {
       <div>
         <h1>Recipe Sharing App</h1>
         {/* Add a form to add new recipes */}
-        <AddRecipeForm />
+        < AddRecipeForm />
 
         {/* Recipe List Display */}
         <h2>Recipe List</h2>
-        < import RecipeList />
+        < RecipeList />
 
         {/* Routing for Recipe Details */}
         <Routes>
