@@ -1,24 +1,15 @@
-import { useState } from 'react';
-import { useRecipeStore } from './recipeStore';
+import useState from 'react';
+import useRecipeStore from '../recipeStore';
 
-const EditRecipeForm = ({ recipe }) => {
+const AddRecipeForm = ({ recipe }) => {
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
-  const [ingredients, setIngredients] = useState(recipe.ingredients.join(', '));
-  const [instructions, setInstructions] = useState(recipe.instructions);
-  
+
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedRecipe = {
-      ...recipe,
-      title,
-      description,
-      ingredients: ingredients.split(',').map((ing) => ing.trim()),
-      instructions,
-    };
-    updateRecipe(updatedRecipe);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateRecipe(recipe.id, { title, description }); // Pass updated recipe
   };
 
   return (
@@ -27,26 +18,18 @@ const EditRecipeForm = ({ recipe }) => {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Recipe Title"
+        placeholder="Title"
+        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Recipe Description"
-      />
-      <textarea
-        value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
-        placeholder="Ingredients (comma-separated)"
-      />
-      <textarea
-        value={instructions}
-        onChange={(e) => setInstructions(e.target.value)}
-        placeholder="Instructions"
+        placeholder="Description"
+        required
       />
       <button type="submit">Update Recipe</button>
     </form>
   );
 };
 
-export default EditRecipeForm;
+export { EditRecipeForm };
