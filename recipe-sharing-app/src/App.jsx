@@ -146,6 +146,22 @@ function App() {
 }
 
 export default App;
+  
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import RecipeDetails from './RecipeDetails';
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        {/* Other routes like home, recipe listing, etc. */}
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
 
 
     import React from 'react';
