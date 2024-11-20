@@ -13,7 +13,7 @@ function App() {
 
         {/* Recipe List Display */}
         <h2>Recipe List</h2>
-        <RecipeList />
+        < import RecipeList />
 
         {/* Routing for Recipe Details */}
         <Routes>
