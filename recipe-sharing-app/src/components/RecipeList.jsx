@@ -21,5 +21,33 @@ const RecipeList = () => {
     </div>
   );
 };
+import React, { useEffect } from 'react';
+import { useRecipeStore } from '../recipeStore';
 
-export { RecipeList };
+const RecipeList = () => {
+  const { recipes, filteredRecipes, filterRecipes } = useRecipeStore((state) => ({
+    recipes: state.recipes,
+    filteredRecipes: state.filteredRecipes,
+    filterRecipes: state.filterRecipes,
+  }));
+
+  // Filter recipes whenever the search term changes
+  useEffect(() => {
+    filterRecipes();
+  }, [filterRecipes]);
+
+  const recipesToDisplay = filteredRecipes.length > 0 ? filteredRecipes : recipes;
+
+  return (
+    <div>
+      {recipesToDisplay.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default RecipeList
