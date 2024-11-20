@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AddRecipeForm } from './components/AddRecipeForm';  // Import AddRecipeForm
-import { RecipeList } from './components/RecipeList';        // Import RecipeList
-import { RecipeDetails } from './components/RecipeDetails';  // Import RecipeDetails
+import AddRecipeForm from './components/AddRecipeForm';  // Importing AddRecipeForm
+import RecipeList from './components/RecipeList';        // Importing RecipeList
+import RecipeDetails from './components/RecipeDetails';  // Importing RecipeDetails
 
 function App() {
   return (
