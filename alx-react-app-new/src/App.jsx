@@ -99,5 +99,16 @@ export default Footer;
   );
   );
 }
+import React from 'react';
+import Counter from './components/Counter';  // Import the Counter component
+
+function App() {
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <Counter />  {/* Use the Counter component */}
+    </div>
+  );
+}
 
 export default App;
