@@ -55,5 +55,35 @@ function App() {
     </Router>
   );
 }
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import BlogPost from './components/BlogPost';
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <h1>React Router - Blog Example</h1>
+
+        {/* Navigation Links */}
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/blog/1">Blog Post 1</Link> | <Link to="/blog/2">Blog Post 2</Link>
+        </nav>
+
+        {/* Define Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+// Simple Home Component
+function Home() {
+  return <h2>Welcome to the Blog Home Page!</h2>;
+}
 
 export default App;
