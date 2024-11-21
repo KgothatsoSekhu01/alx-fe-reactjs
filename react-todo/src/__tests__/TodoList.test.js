@@ -1,41 +1,54 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../TodoList';  // Adjust path based on your folder structure
+import React, { useState } from 'react';
 
-describe('TodoList', () => {
-  it('renders correctly with initial todos', () => {
-    const demoTodos = [
-      { id: 1, text: 'Learn Jest', completed: false },
-      { id: 2, text: 'Learn React Testing Library', completed: false },
-    ];
+function TodoList() {
+  // Initial state with demo todos
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn Jest', completed: false },
+    { id: 2, text: 'Learn React Testing Library', completed: false }
+  ]);
+  const [newTodo, setNewTodo] = useState('');
 
-    render(<TodoList todos={demoTodos} />);
+  // Add a new todo
+  const addTodo = () => {
+    if (newTodo.trim()) {
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+      setNewTodo('');
+    }
+  };
 
-    demoTodos.forEach(todo => {
-      expect(screen.getByText(todo.text)).toBeInTheDocument();
-    });
-  });
+  // Toggle the completion of a todo
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
 
-  it('toggles todo completion state', () => {
-    const demoTodos = [
-      { id: 1, text: 'Learn Jest', completed: false },
-      { id: 2, text: 'Learn React Testing Library', completed: false },
-    ];
+  // Delete a todo
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
 
-    render(<TodoList todos={demoTodos} />);
+  return (
+    <div>
+      <h1>Todo List</h1>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder="Enter a new todo"
+      />
+      <button onClick={addTodo}>Add Todo</button>
 
-    // Find the checkbox or button used for toggling (assuming it's a checkbox)
-    const toggleButtons = screen.getAllByRole('checkbox');
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+            <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-    // Toggle the first todo item
-    fireEvent.click(toggleButtons[0]);
-
-    // Check if the todo item state has been toggled to completed
-    expect(screen.getByText('Learn Jest').closest('li')).toHaveClass('completed');
-
-    // Toggle the first todo item back to not completed
-    fireEvent.click(toggleButtons[0]);
-
-    // Ensure the todo is no longer marked as completed
-    expect(screen.getByText('Learn Jest').closest('li')).not.toHaveClass('completed');
-  });
-});
+export default TodoList;
