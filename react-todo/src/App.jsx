@@ -41,5 +41,15 @@ function App() {
     </div>
   );
 }
+import React from "react";
+import TodoList from "./TodoList"; // Adjust the import path as necessary
+
+const App = () => {
+  return (
+    <div>
+      <TodoList /> {/* Render the TodoList component */}
+    </div>
+  );
+};
 
 export default App;
