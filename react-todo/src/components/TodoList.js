@@ -79,5 +79,12 @@ const AddTodoForm = ({ onAddTodo }) => {
     </form>
   );
 };
+test("deletes a todo", () => {
+  render(<TodoList />);
+  const deleteButton = screen.getAllByText(/Delete/i)[0];
+  
+  fireEvent.click(deleteButton);
+  expect(screen.queryByText(/Learn React/i)).not.toBeInTheDocument();
+});
 
 export default TodoList;
