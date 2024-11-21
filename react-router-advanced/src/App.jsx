@@ -18,4 +18,6 @@ function App() {
   );
 }
 
+<Route path="/user/:userId" element={<UserProfile />} />
+
 export default App;
