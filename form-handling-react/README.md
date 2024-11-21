@@ -16,5 +16,5 @@ This is a demo project that integrates React Query into a React application for 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/react-query-demo.git
+git clone https://github.com/kgothatsokgabosekhu01/react-query-demo.git
 cd react-query-demo
