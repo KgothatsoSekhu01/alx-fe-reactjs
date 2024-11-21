@@ -53,7 +53,7 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username} // Value is controlled by state
+          value={username} // Value is controlled by state
           onChange={handleInputChange} // Handle input change
         />
         {errors.username && <div style={{ color: 'red' }}>{errors.username}</div>}
@@ -65,7 +65,7 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email} // Value is controlled by state
+          value={email} // Value is controlled by state
           onChange={handleInputChange} // Handle input change
         />
         {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
@@ -77,7 +77,7 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password} // Value is controlled by state
+          value={password} // Value is controlled by state
           onChange={handleInputChange} // Handle input change
         />
         {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
