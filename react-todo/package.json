@@ -1,9 +1,11 @@
 {
-  "name": "alx-react-app",
+  "name": "react-todo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+  "test": "jest"
+}
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
