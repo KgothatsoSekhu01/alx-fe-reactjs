@@ -1,90 +1,56 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-// TodoList component
-const TodoList = () => {
-  // Initialize the state with a few demo todos
+function TodoList() {
   const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Write Tests", completed: false },
+    { id: 1, text: 'Learn Jest', completed: false },
+    { id: 2, text: 'Learn React Testing Library', completed: false },
   ]);
+  const [newTodo, setNewTodo] = useState('');
 
   // Add a new todo
-  const addTodo = (newTodoText) => {
-    const newTodo = {
-      id: Date.now(), // Unique ID based on timestamp
-      text: newTodoText,
-      completed: false,
-    };
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  const addTodo = () => {
+    if (newTodo.trim()) {
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: newTodo, completed: false }
+      ]);
+      setNewTodo('');
+    }
   };
 
   // Toggle the completion status of a todo
   const toggleTodo = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
 
-  // Delete a todo item
+  // Delete a todo
   const deleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
     <div>
       <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder="Enter a new todo"
+      />
+      <button onClick={addTodo}>Add Todo</button>
+
       <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-              cursor: "pointer",
-            }}
-          >
-            {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>Delete</button>
+        {todos.map(todo => (
+          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+            <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
     </div>
   );
-};
-
-// AddTodoForm component to handle adding new todos
-const AddTodoForm = ({ onAddTodo }) => {
-  const [newTodoText, setNewTodoText] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newTodoText.trim()) {
-      onAddTodo(newTodoText);
-      setNewTodoText("");
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={newTodoText}
-        onChange={(e) => setNewTodoText(e.target.value)}
-        placeholder="Add a new todo"
-      />
-      <button type="submit">Add Todo</button>
-    </form>
-  );
-};
-test("deletes a todo", () => {
-  render(<TodoList />);
-  const deleteButton = screen.getAllByText(/Delete/i)[0];
-  
-  fireEvent.click(deleteButton);
-  expect(screen.queryByText(/Learn React/i)).not.toBeInTheDocument();
-});
+}
 
 export default TodoList;
