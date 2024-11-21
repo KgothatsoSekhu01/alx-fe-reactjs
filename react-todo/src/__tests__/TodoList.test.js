@@ -1,54 +1,55 @@
-import React, { useState } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import TodoList from '../TodoList';
 
-function TodoList() {
-  // Initial state with demo todos
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn Jest', completed: false },
-    { id: 2, text: 'Learn React Testing Library', completed: false }
-  ]);
-  const [newTodo, setNewTodo] = useState('');
+describe('TodoList', () => {
+  it('renders correctly with initial todos', () => {
+    const demoTodos = [
+      { id: 1, text: 'Learn Jest', completed: false },
+      { id: 2, text: 'Learn React Testing Library', completed: false },
+    ];
 
-  // Add a new todo
-  const addTodo = () => {
-    if (newTodo.trim()) {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
-      setNewTodo('');
-    }
-  };
+    render(<TodoList />);
+    
+    // Check if initial todos are rendered
+    demoTodos.forEach(todo => {
+      expect(screen.getByText(todo.text)).toBeInTheDocument();
+    });
+  });
 
-  // Toggle the completion of a todo
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
+  it('adds a new todo', () => {
+    render(<TodoList />);
 
-  // Delete a todo
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
+    // Simulate user input and form submission
+    const input = screen.getByPlaceholderText('Enter a new todo');
+    const button = screen.getByText('Add Todo');
+    
+    fireEvent.change(input, { target: { value: 'New Todo' } });
+    fireEvent.click(button);
 
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-        placeholder="Enter a new todo"
-      />
-      <button onClick={addTodo}>Add Todo</button>
+    // Check if the new todo is added to the list
+    expect(screen.getByText('New Todo')).toBeInTheDocument();
+  });
 
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-            <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+  it('toggles todo completion state', () => {
+    render(<TodoList />);
 
-export default TodoList;
+    const todoItem = screen.getByText('Learn Jest');
+    fireEvent.click(todoItem); // Toggle to completed
+    
+    // Check if the todo is marked as completed
+    expect(todoItem.closest('li')).toHaveClass('completed');
+
+    fireEvent.click(todoItem); // Toggle back to not completed
+    expect(todoItem.closest('li')).not.toHaveClass('completed');
+  });
+
+  it('deletes a todo', () => {
+    render(<TodoList />);
+
+    const deleteButton = screen.getAllByText('Delete')[0];
+    fireEvent.click(deleteButton);
+
+    // Check if the todo is removed from the list
+    expect(screen.queryByText('Learn Jest')).not.toBeInTheDocument();
+  });
+});
