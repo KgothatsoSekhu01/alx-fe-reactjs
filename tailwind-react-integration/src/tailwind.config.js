@@ -1,20 +1,11 @@
 module.exports = {
-  purge: [
-    './src/**/*.{js,jsx,ts,tsx}', // Scans all JS/JSX/TS/TSX files in src
-    './public/index.html',        // Scans your HTML files
-  ],
-  darkMode: 'class', // Enables dark mode using a custom class (you can use 'media' as well)
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  darkMode: false, // You can customize this if you want dark mode support
   theme: {
-    extend: {
-      colors: {
-        'custom-blue': '#1E40AF',
-      },
-    },
+    extend: {},
   },
   variants: {
-    extend: {
-      backgroundColor: ['active'], // Add 'active' state for backgroundColor
-    },
+    extend: {},
   },
   plugins: [],
-}
+};
