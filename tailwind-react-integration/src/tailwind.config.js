@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [],
 }
+ ["purge", "darkMode", "variants"]
 module.exports = {
   "darkMode",: 'class', // 'media' or 'class'
   "purge": [
