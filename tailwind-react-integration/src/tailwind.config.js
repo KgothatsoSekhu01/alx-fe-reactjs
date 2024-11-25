@@ -1,12 +1,11 @@
 module.exports = {
-    content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-    darkMode: false, // You can customize this if you want dark mode support
-    theme: {
-      extend: {},
-    },
-    variants: {
-      extend: {},
-    },
-    plugins: [],
-  };
-  
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
+  ],
+  darkMode: 'class', // Optional: If you want to enable dark mode using a class
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
