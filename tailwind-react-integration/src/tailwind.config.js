@@ -19,11 +19,7 @@ module.exports = {
   },
   plugins: [],
 }
-<body class="dark">
-  <div class="bg-white dark:bg-gray-800 text-black dark:text-white">
-    This text will be white in dark mode and black in light mode.
-  </div>
-</body>
+
 module.exports = {
   purge: [
     './src/**/*.{js,jsx,ts,tsx}',
