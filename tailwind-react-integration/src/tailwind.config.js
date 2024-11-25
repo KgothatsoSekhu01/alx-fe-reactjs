@@ -3,7 +3,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html"
   ],
-
+"purge", "darkMode", "variants"
   module.export = {
   darkMode: 'class', // Optional: If you want to enable dark mode using a class
  module.export = {
