@@ -1,39 +1,38 @@
-module.exports = {
-  "purge",: [
-    './src/**/*.{js,jsx,ts,tsx}', // Path to all your source files
-    './public/index.html',        // Path to your HTML files
-  ],
+/** @type {import('tailwindcss').Config} */
+export default {
+  purge: [],
   theme: {
     extend: {},
   },
   plugins: [],
 }
- ["purge", "darkMode", "variants"]
 module.exports = {
-  "darkMode",: 'class', // 'media' or 'class'
-  "purge": [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './public/index.html',
+  purge: [
+    './src/*/.{html,js,jsx,ts,tsx}', // Adjust paths based on your project structure
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 
-module.exports = {
-  "purge",: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './public/index.html',
   ],
-  "darkMode",: 'class',  // Optional
+}
+module.exports = {
+  darkMode: 'class', // Options: 'media', 'class', or false (default)
+}
+module.exports = {
   theme: {
-    extend: {},
-  },
-  "variants",: {
     extend: {
-      backgroundColor: ['active'],  // Add 'active' state to backgroundColor utilities
+      backgroundColor: ['active'], // Example of extending background color variants
     },
   },
-  plugins: [],
 }
+module.exports = {
+  purge: [
+    './src/*/.{html,js,jsx,ts,tsx}', // Paths to your templates
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
