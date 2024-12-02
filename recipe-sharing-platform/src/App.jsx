@@ -61,5 +61,15 @@ function App() {
     </Router>
   );
 }
+import AddRecipeForm from './components/AddRecipeForm';
+
+// In your App.js or relevant component
+function App() {
+  return (
+    <div>
+      <AddRecipeForm />
+    </div>
+  );
+}
 
 export default App;
