@@ -9,6 +9,23 @@ const AddRecipeForm = () => {
   // State for error messages
   const [errors, setErrors] = useState({});
 
+   // Validation function
+  const validate = () => {
+    const newErrors = {};
+
+    // Validate the fields
+    if (!title) newErrors.title = 'Title is required';
+    if (!ingredients) newErrors.ingredients = 'Ingredients are required';
+    if (!steps) newErrors.steps = 'Preparation steps are required';
+
+    // Validate ingredients to ensure at least two ingredients are provided
+    const ingredientsList = ingredients.split('\n').filter((ingredient) => ingredient.trim() !== '');
+    if (ingredientsList.length < 2) {
+      newErrors.ingredients = 'Please provide at least two ingredients';
+    }
+
+    return newErrors;
+  };
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
