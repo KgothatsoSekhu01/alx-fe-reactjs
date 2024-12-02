@@ -9,7 +9,7 @@ const AddRecipeForm = () => {
   // State for error messages
   const [errors, setErrors] = useState({});
 
-   // Validation function
+  // Validation function
   const validate = () => {
     const newErrors = {};
 
@@ -26,38 +26,28 @@ const AddRecipeForm = () => {
 
     return newErrors;
   };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Reset errors at the beginning of submission
-    const newErrors = {};
+    // Perform validation
+    const validationErrors = validate();
 
-    // Basic validation checks
-    if (!title) newErrors.title = 'Title is required';
-    if (!ingredients) newErrors.ingredients = 'Ingredients are required';
-    if (!steps) newErrors.steps = 'Preparation steps are required';
-
-    // Check ingredients to ensure at least two are provided
-    const ingredientsList = ingredients.split('\n').filter((ingredient) => ingredient.trim() !== '');
-    if (ingredientsList.length < 2) {
-      newErrors.ingredients = 'Please provide at least two ingredients';
-    }
-
-    // If there are validation errors, set them and stop submission
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    // If validation fails, set errors and stop submission
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    // If no errors, handle the successful submission (e.g., log data to console)
+    // Handle successful form submission (e.g., log data to console)
     console.log({
       title,
-      ingredients: ingredientsList,
+      ingredients: ingredients.split('\n').filter((ingredient) => ingredient.trim() !== ''),
       steps: steps.split('\n'),
     });
 
-    // Optionally reset the form after submission
+    // Optionally reset the form after successful submission
     setTitle('');
     setIngredients('');
     setSteps('');
@@ -65,7 +55,7 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg md:max-w-3xl">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Recipe Title */}
