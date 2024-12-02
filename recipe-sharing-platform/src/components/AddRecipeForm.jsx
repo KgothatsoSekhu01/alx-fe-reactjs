@@ -1,49 +1,54 @@
 import { useState } from 'react';
 
 const AddRecipeForm = () => {
+  // States for form fields
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState('');
+  
+  // State for error messages
   const [errors, setErrors] = useState({});
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation checks
+    // Reset errors at the beginning of submission
     const newErrors = {};
+
+    // Basic validation checks
     if (!title) newErrors.title = 'Title is required';
     if (!ingredients) newErrors.ingredients = 'Ingredients are required';
-    if (!instructions) newErrors.instructions = 'Instructions are required';
+    if (!steps) newErrors.steps = 'Preparation steps are required';
 
+    // Check ingredients to ensure at least two are provided
     const ingredientsList = ingredients.split('\n').filter((ingredient) => ingredient.trim() !== '');
     if (ingredientsList.length < 2) {
       newErrors.ingredients = 'Please provide at least two ingredients';
     }
 
+    // If there are validation errors, set them and stop submission
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // Clear errors if form is valid
-    setErrors({});
-
-    // Handle successful form submission (e.g., send data to the server)
+    // If no errors, handle the successful submission (e.g., log data to console)
     console.log({
       title,
       ingredients: ingredientsList,
-      instructions: instructions.split('\n'),
+      steps: steps.split('\n'),
     });
 
-    // Optionally reset the form
+    // Optionally reset the form after submission
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps('');
+    setErrors({});
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
+    <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Recipe Title */}
@@ -73,18 +78,18 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
 
-        {/* Instructions */}
+        {/* Preparation Steps */}
         <div className="space-y-2">
-          <label htmlFor="instructions" className="block text-lg font-medium text-gray-700">Instructions</label>
+          <label htmlFor="steps" className="block text-lg font-medium text-gray-700">Preparation Steps</label>
           <textarea
-            id="instructions"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            id="steps"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            rows="4"
-            placeholder="Enter cooking instructions"
+            rows="6"
+            placeholder="Enter preparation steps, one per line"
           />
-          {errors.instructions && <p className="text-red-500 text-sm">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
 
         {/* Submit Button */}
