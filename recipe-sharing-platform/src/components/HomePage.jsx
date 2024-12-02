@@ -1,4 +1,13 @@
 import { Link } from 'react-router-dom';
+import recipeData from '../data.json';
+
+const HomePage = () => {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    // Simulating fetching the data from the local JSON file
+    setRecipes(recipeData);
+  }, []);
 
 const HomePage = () => {
   return (
