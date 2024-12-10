@@ -3,10 +3,15 @@ import { fetchUserData } from '../services/githubService';
 
 const Search = ({ setUsers, setLoading, setError }) => {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState(0);
 
-  // Handle input change
+  // Handle input changes
   const handleInputChange = (e) => {
-    setUsername(e.target.value);
+    const { name, value } = e.target;
+    if (name === 'username') setUsername(value);
+    if (name === 'location') setLocation(value);
+    if (name === 'minRepos') setMinRepos(value);
   };
 
   // Handle form submission
@@ -14,32 +19,66 @@ const Search = ({ setUsers, setLoading, setError }) => {
     e.preventDefault();
     if (username.trim() === '') return;
 
-    setLoading(true); // Show loading message
-    setError(''); // Reset error message
+    setLoading(true);
+    setError('');
 
     try {
-      // Fetch user data from GitHub API
-      const userData = await fetchUserData(username);
-      setUsers(userData); // Set the fetched user data to parent component
+      // Construct the query with advanced filters
+      const query = `user:${username}+location:${location}+repos:>=${minRepos}`;
+      const userData = await fetchUserData(query);
+      setUsers(userData);
     } catch (error) {
-      // If error occurs (e.g., user not found), set the error state
-      setError("avatar_url", "login", "Looks like we cant find the user", "img"];
+      setError("avatar_url", "login", "Looks like we cant find the user", "img");
     } finally {
-      setLoading(false); // Hide loading message after API call
-     
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter GitHub username"
-          value={username}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Search</button>
+    <div className="max-w-xl mx-auto mt-4">
+      <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded shadow-md">
+        <div>
+          <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter GitHub username"
+            value={username}
+            onChange={handleInputChange}
+            className="mt-2 p-2 border border-gray-300 rounded w-full"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Enter location (optional)"
+            value={location}
+            onChange={handleInputChange}
+            className="mt-2 p-2 border border-gray-300 rounded w-full"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="minRepos" className="block text-sm font-medium text-gray-700">Minimum Repositories</label>
+          <input
+            type="number"
+            id="minRepos"
+            name="minRepos"
+            value={minRepos}
+            onChange={handleInputChange}
+            className="mt-2 p-2 border border-gray-300 rounded w-full"
+            placeholder="Minimum number of repositories"
+          />
+        </div>
+
+        <div className="text-center">
+          <button type="submit" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded shadow">Search</button>
+        </div>
       </form>
     </div>
   );
