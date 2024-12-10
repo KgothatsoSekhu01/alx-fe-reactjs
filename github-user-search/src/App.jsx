@@ -29,6 +29,30 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+    import { useState } from 'react';
+import './App.css';
+import SearchForm from './components/SearchForm';
+import UserList from './components/UserList';
+
+function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <div className="App">
+      <h1>GitHub User Search</h1>
+      <SearchForm setUsers={setUsers} setLoading={setLoading} />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <UserList users={users} />
+      )}
+    </div>
+  );
+}
+
+export default App;
+
   )
 }
 
