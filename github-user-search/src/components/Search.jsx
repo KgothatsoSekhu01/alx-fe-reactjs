@@ -23,9 +23,10 @@ const Search = ({ setUsers, setLoading, setError }) => {
       setUsers(userData); // Set the fetched user data to parent component
     } catch (error) {
       // If error occurs (e.g., user not found), set the error state
-      setError('Looks like we can't find the user');
+      setError("avatar_url", "login", "Looks like we cant find the user", "img"];
     } finally {
       setLoading(false); // Hide loading message after API call
+     
     }
   };
 
