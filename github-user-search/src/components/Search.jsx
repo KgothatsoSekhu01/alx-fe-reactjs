@@ -1,27 +1,31 @@
 import { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
-const SearchForm = ({ setUsers, setLoading, setError }) => {
+const Search = ({ setUsers, setLoading, setError }) => {
   const [username, setUsername] = useState('');
 
+  // Handle input change
   const handleInputChange = (e) => {
     setUsername(e.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username.trim() === '') return;
-    
-    setLoading(true);
-    setError('');
-    
+
+    setLoading(true); // Show loading message
+    setError(''); // Reset error message
+
     try {
+      // Fetch user data from GitHub API
       const userData = await fetchUserData(username);
-      setUsers(userData);
+      setUsers(userData); // Set the fetched user data to parent component
     } catch (error) {
-      setError('Looks like we can\'t find the user');
+      // If error occurs (e.g., user not found), set the error state
+      setError('Looks like we can't find the user');
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide loading message after API call
     }
   };
 
@@ -40,4 +44,4 @@ const SearchForm = ({ setUsers, setLoading, setError }) => {
   );
 };
 
-export default SearchForm;
+export default Search;
