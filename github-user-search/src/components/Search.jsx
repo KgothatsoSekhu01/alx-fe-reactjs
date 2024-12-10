@@ -18,6 +18,23 @@ const Search = ({ setUsers, setLoading, setError }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username.trim() === '') return;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (username.trim() === '') return;
+
+  setLoading(true);
+  setError('');
+
+  try {
+    // Call fetchUserData with username, location, and minRepos
+    const userData = await fetchUserData(username, location, minRepos);
+    setUsers(userData);
+  } catch (error) {
+    setError('Looks like we can\'t find any users with those criteria');
+  } finally {
+    setLoading(false);
+  }
+};
 
     setLoading(true);
     setError('');
