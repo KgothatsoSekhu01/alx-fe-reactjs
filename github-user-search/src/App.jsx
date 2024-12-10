@@ -72,6 +72,32 @@ function App() {
     </div>
   );
 }
+import { useState } from 'react';
+import './App.css';
+import Search from './components/Search';
+import UserList from './components/UserList';
+
+function App() {
+  const [users, setUsers] = useState([]); // Store fetched user data
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(''); // Error message
+
+  return (
+    <div className="App">
+      <h1 className="text-center text-2xl font-bold mt-6">GitHub User Search</h1>
+      
+      <Search setUsers={setUsers} setLoading={setLoading} setError={setError} />
+      
+      {loading && <p className="text-center">Loading...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
+      
+      {users.length > 0 && !loading && !error && (
+        <UserList users={users} />
+      )}
+    </div>
+  );
+}
 
 export default App;
+
 
