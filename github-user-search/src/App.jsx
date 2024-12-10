@@ -94,15 +94,5 @@ function App() {
       {users.length > 0 && !loading && !error && (
         <UserList users={users} />
       )}
-    </div>
-    // Example in App.jsx
-<div className="bg-blue-500 text-white p-4">
-  <h1>GitHub User Search</h1>
-</div>
-
-  );
-}
 
 export default App;
-
-
