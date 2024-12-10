@@ -50,10 +50,28 @@ function App() {
     </div>
   );
 }
+import { useState } from 'react';
+import './App.css';
+import SearchForm from './components/SearchForm';
+import UserList from './components/UserList';
+
+function App() {
+  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  return (
+    <div className="App">
+      <h1>GitHub User Search</h1>
+      <SearchForm setUsers={setUsers} setLoading={setLoading} setError={setError} />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {users && !loading && !error && (
+        <UserList user={users} />
+      )}
+    </div>
+  );
+}
 
 export default App;
 
-  )
-}
-
-export default App
