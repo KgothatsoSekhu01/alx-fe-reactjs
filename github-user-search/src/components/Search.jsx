@@ -80,6 +80,32 @@ const Search = ({ setUsers, setLoading, setError }) => {
           <button type="submit" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded shadow">Search</button>
         </div>
       </form>
+
+      {/* Conditional Rendering based on the loading, error, and users state */}
+      {setLoading && <p className="text-center mt-4">Loading...</p>}
+
+      {setError && <p className="text-center mt-4 text-red-500">{setError}</p>}
+
+      {/* Render users if available */}
+      <div className="mt-6">
+        {setUsers && setUsers.length > 0 ? (
+          setUsers.map((user) => (
+            <div key={user.id} className="bg-white p-4 rounded shadow mb-4">
+              <div className="flex items-center space-x-4">
+                <img src={user.avatar_url} alt={user.login} className="w-16 h-16 rounded-full" />
+                <div>
+                  <h3 className="font-bold text-lg">{user.login}</h3>
+                  <p className="text-sm text-gray-500">{user.location || 'Location not provided'}</p>
+                  <p className="text-sm text-gray-500">Repositories: {user.public_repos}</p>
+                  <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">View Profile</a>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center mt-4">No users found.</p>
+        )}
+      </div>
     </div>
   );
 };
